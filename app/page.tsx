@@ -10,7 +10,27 @@ export const metadata: Metadata = {
   },
 };
 
-const slideImages = Array.from({ length: 4 }, (_, index) => ({
+const slideImages = [
+  '/slide/0.jpg',
+  '/slide/1.jpg',
+  '/slide/2.jpg',
+  '/slide/3.jpg',
+  '/slide/4.jpg',
+  '/slide/5.jpg',
+  '/slide/6.jpg',
+  '/slide/7.jpg',
+  '/slide/8.jpg',
+  '/slide/9.jpg',
+  '/slide/0.webp',
+  '/slide/1.webp',
+  '/slide/2.webp',
+  '/slide/3.webp',
+].map((src, i) => ({
+  src,
+  alt: `blurred slide image ${i}`,
+}));
+
+Array.from({ length: 4 }, (_, index) => ({
   src: `/slide/${index}.webp`,
   alt: `blurred slide Image ${index}`,
 }));
