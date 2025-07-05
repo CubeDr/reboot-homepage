@@ -21,7 +21,6 @@ function NaverMap({ lat, lng }: Coords) {
       return;
     }
 
-    console.log(lat, lng);
     const position = new window.naver.maps.LatLng(lat, lng);
 
     const mapOptions = {
@@ -47,6 +46,15 @@ function NaverMap({ lat, lng }: Coords) {
     mapRef.current.setCenter(position);
     markerRef.current.setPosition(position);
   }, [scriptLoaded]);
+
+  useEffect(() => {
+    if (!scriptLoaded || mapRef.current == null || markerRef.current == null) return;
+
+    const position = new window.naver.maps.LatLng(lat, lng);
+
+    mapRef.current.setCenter(position);
+    markerRef.current.setPosition(position);
+  }, [scriptLoaded, lat, lng]);
 
   return (
     <>

@@ -34,7 +34,7 @@ const locations: { [key: string]: any } = {
     address: '경기 남양주시 진건읍 진건오남로390번길 89',
     tel: '0507-1386-3720',
     phone: '010-3105-6212',
-    coords: { lat: 37.6689999, lng: 127.2084842 },
+    coords: { lat: 37.6689999, lng: 127.2085 },
     distanceInfo: [
       {
         transport: '지하철',
