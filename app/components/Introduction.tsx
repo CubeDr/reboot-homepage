@@ -11,9 +11,6 @@ export default function Introduction() {
         <hr className="w-8 desktop:w-1/3 h-1 my-4 desktop:my-8 mx-auto bg-white" />
         <span className="block text-center desktop:text-xl">남양주 최고의 배드민턴 레슨 시설</span>
       </div>
-      <div className="relative mx-auto">
-        <RegisterButton />
-      </div>
     </section>
   );
 }
