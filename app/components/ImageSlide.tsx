@@ -47,20 +47,20 @@ export default function ImageSlide({
   }, []);
 
   return (
-    <div className="w-full h-svh relative overflow-clip"    >
+    <div className="w-full h-svh relative overflow-clip">
       <ImageFadeIn src={srcs[currentIndex]} onFadeEnd={onFadeEnd} />
       <div className="absolute top-16 bottom-24 left-0 right-0">{children}</div>
       <div
-        className={'absolute left-4 top-1/2 w-12 mobile:w-8 p-2 cursor-pointer transition-transform' + (isSlidable ? ' hoverable:hover:scale-125 active:scale-125' : '')}
+        className={'absolute left-4 top-1/2 w-[80px] h-[80px] rounded-full mobile:w-8 py-4 pl-5 cursor-pointer transition-transform bg-black/20 text-white text-center' + (isSlidable ? ' hoverable:hover:scale-125 active:scale-125' : '')}
         onClick={() => move(-1)}
       >
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA5AQMAAAAbVwlvAAAABlBMVEVHcEz///+flKJDAAAAAXRSTlMAQObYZgAAADhJREFUGNNjYGBg4AFiBhkQYQEiCkDEAyBmPAAkmBuABDtIiI8uyiAsC7gsWB1YB1gv2BQ6KeQBAFwUFG/o5+mVAAAAAElFTkSuQmCC" />
+        <img className="w-[30px] h-[50px]" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA5AQMAAAAbVwlvAAAABlBMVEVHcEz///+flKJDAAAAAXRSTlMAQObYZgAAADhJREFUGNNjYGBg4AFiBhkQYQEiCkDEAyBmPAAkmBuABDtIiI8uyiAsC7gsWB1YB1gv2BQ6KeQBAFwUFG/o5+mVAAAAAElFTkSuQmCC" />
       </div>
       <div
-        className={'absolute right-4 top-1/2 w-12 mobile:w-8 p-2 cursor-pointer transition-transform' + (isSlidable ? ' hoverable:hover:scale-125 active:scale-125' : '')}
+        className={'absolute right-4 top-1/2 w-[80px] h-[80px] rounded-full mobile:w-8 py-4 pl-7 cursor-pointer transition-transform bg-black/20 text-white' + (isSlidable ? ' hoverable:hover:scale-125 active:scale-125' : '')}
         onClick={() => move(1)}
       >
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA5AQMAAAAbVwlvAAAABlBMVEVHcEz///+flKJDAAAAAXRSTlMAQObYZgAAADRJREFUGNNjOMAABA9ARAGIsAARMiCCD0SwgwjmBiDBSEeFFnCxBzB1YB3scFNorowBpAwAlX8Wm6/WG/sAAAAASUVORK5CYII=" />
+        <img className="w-[30px] h-[50px]" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA5AQMAAAAbVwlvAAAABlBMVEVHcEz///+flKJDAAAAAXRSTlMAQObYZgAAADRJREFUGNNjOMAABA9ARAGIsAARMiCCD0SwgwjmBiDBSEeFFnCxBzB1YB3scFNorowBpAwAlX8Wm6/WG/sAAAAASUVORK5CYII=" />
       </div>
       <div className="absolute right-16 mobile:right-4 bottom-4 flex justify-center mt-4">
         {srcs.map((_, index) => (
