@@ -5,9 +5,13 @@ import { useEffect, useRef, useState } from 'react';
 import { NAVER_API_KEY } from '@/config';
 
 const MAPID = 'naver-map';
-const COORDINATES = [37.6689999, 127.2084842];
 
-function NaverMap() {
+export interface Coords {
+  lat: number;
+  lng: number;
+}
+
+function NaverMap({ lat, lng }: Coords) {
   const mapRef = useRef<naver.maps.Map>();
   const markerRef = useRef<naver.maps.Marker>();
   const [scriptLoaded, setScriptLoaded] = useState(false);
@@ -17,10 +21,8 @@ function NaverMap() {
       return;
     }
 
-    const position = new window.naver.maps.LatLng(
-      COORDINATES[0],
-      COORDINATES[1]
-    );
+    console.log(lat, lng);
+    const position = new window.naver.maps.LatLng(lat, lng);
 
     const mapOptions = {
       center: position,

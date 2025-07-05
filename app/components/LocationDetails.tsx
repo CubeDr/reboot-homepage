@@ -1,4 +1,4 @@
-import NaverMap from './NaverMap';
+import NaverMap, { Coords } from './NaverMap';
 
 export interface DistanceInfo {
   transport: string;
@@ -12,13 +12,14 @@ interface Props {
   tel: string;
   phone: string;
   distanceInfo: DistanceInfo[];
+  coords: Coords;
 }
 
-export default function LocationDetails({ name, address, tel, phone, distanceInfo }: Props) {
+export default function LocationDetails({ name, address, tel, phone, distanceInfo, coords }: Props) {
   return (
     <div className="flex flex-row mobile:flex-col items-start mobile:justify-center gap-6">
-      <div className="w-full h-64 mobile:h-auto">
-        <NaverMap />
+      <div className="w-full h-100 mobile:h-auto">
+        <NaverMap {...coords} />
       </div>
       <div className="w-full text-gray-700 leading-relaxed space-y-4">
         <div className="mb-8">
