@@ -84,7 +84,7 @@ export default async function RootLayout({
                   </a>
                 </div>
                 <div className="mb-4 text-sm">
-                  경기 남양주시 진건읍 진건오남로390번길 89 1층
+                  경기 남양주시 별내면 청학로54번길 55-30 1동
                 </div>
                 <div className="mb-4 text-xs">
                   © 2024 리부트 배드민턴 전용구장. All Rights Reserved.
