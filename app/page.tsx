@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import Introduction from './components/Introduction';
 import MainCoaches from './components/MainCoaches';
 import Location from './components/Location';
+import Catalog from './components/Catalog';
 
 export const metadata: Metadata = {
   other: {
@@ -42,6 +43,7 @@ export default function Home() {
         <Introduction />
       </ImageSlide>
       <hr />
+      <Catalog />
       <MainCoaches />
       <Location />
     </div>
