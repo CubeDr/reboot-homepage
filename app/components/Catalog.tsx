@@ -1,152 +1,145 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { useState, useRef, useLayoutEffect, forwardRef } from 'react';
 
-// Define the structure for a single page's content
-interface PageData {
-  imageUrl: string;
+function CatalogInfoItem({
+  title,
+  items,
+}: {
   title: string;
-  description: string;
-}
-
-// Create an array of data for the book's content
-const bookData: PageData[] = Array.from({ length: 5 }, (_, i) => ({
-  imageUrl: `https://placehold.co/600x800/e2e8f0/4a5568?text=Product+${i + 1}`,
-  title: `Catalog Entry ${i + 1}`,
-  description: `This is the detailed description for product ${i + 1}. It highlights the key features, materials, and unique design philosophy.`,
-}));
-
-// A flattened list of single pages for mobile view
-const flatPages = bookData.flatMap(spread => [
-  { type: 'image' as const, data: spread },
-  { type: 'text' as const, data: spread },
-]);
-
-function Catalog(): JSX.Element {
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [currentPageIndex, setCurrentPageIndex] = useState(0);
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsSmallScreen(window.innerWidth < 680);
-    };
-
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-
-    return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
-
-  // Reset index when view mode changes to prevent out-of-bounds errors
-  useEffect(() => {
-    setCurrentPageIndex(0);
-  }, [isSmallScreen]);
-
-  const totalPages = isSmallScreen ? flatPages.length : bookData.length;
-
-  const handlePrevPage = (): void => {
-    setCurrentPageIndex((prev) => Math.max(prev - 1, 0));
-  };
-
-  const handleNextPage = (): void => {
-    setCurrentPageIndex((prev) => Math.min(prev + 1, totalPages - 1));
-  };
-
-  const handlePageInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const pageNumber = Number(e.target.value);
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
-      setCurrentPageIndex(pageNumber - 1);
-    }
-  };
-
-  // Get the data for the current page, ensuring it exists
-  const currentSpreadData = bookData[currentPageIndex];
-  const currentFlatPageData = flatPages[currentPageIndex];
-
-  const largeScreenView = currentSpreadData ? (
-    <div className='flex flex-row bg-white rounded-lg shadow-2xl overflow-hidden aspect-[2/1.2]'>
-      {/* Left Page: Image */}
-      <div className='w-1/2 flex-shrink-0'>
-        <img
-          className='object-cover w-full h-full'
-          src={currentSpreadData.imageUrl}
-          alt={currentSpreadData.title}
-        />
-      </div>
-      {/* Right Page: Text */}
-      <div className='w-1/2 flex-shrink-0 p-6 md:p-10 flex flex-col overflow-y-auto'>
-        <div className='flex-grow'>
-          <h2 className='text-xl md:text-3xl font-bold text-gray-800 mb-4'>
-            {currentSpreadData.title}
-          </h2>
-          <p className='text-sm md:text-base text-gray-600 leading-relaxed'>
-            {currentSpreadData.description}
-          </p>
-        </div>
-        <div className='mt-6'>
-          <button className='bg-gray-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300 text-sm md:text-base focus:outline-none'>
-            Learn More
-          </button>
-        </div>
-      </div>
-    </div>
-  ) : null;
-
-  const smallScreenView = currentFlatPageData ? (
-    <div className='bg-white rounded-lg shadow-2xl overflow-hidden aspect-[9/14] max-w-sm mx-auto'>
-      {currentFlatPageData.type === 'image' ? (
-        <img
-          className='object-cover w-full h-full'
-          src={currentFlatPageData.data.imageUrl}
-          alt={currentFlatPageData.data.title}
-        />
-      ) : (
-        <div className='p-8 flex flex-col overflow-y-auto h-full'>
-          <h2 className='text-2xl font-bold text-gray-800 mb-4'>
-            {currentFlatPageData.data.title}
-          </h2>
-          <p className='text-base text-gray-600 leading-relaxed'>
-            {currentFlatPageData.data.description}
-          </p>
-        </div>
-      )}
-    </div>
-  ) : null;
-
+  items: string[];
+}) {
   return (
-    <div className='max-w-5xl mx-auto my-8 font-sans p-4'>
-      {/* Book Container */}
-      {isSmallScreen ? smallScreenView : largeScreenView}
-
-      {/* Paging Control */}
-      <div className='flex justify-center items-center mt-8 space-x-4 text-gray-700'>
-        <button
-          onClick={handlePrevPage}
-          disabled={currentPageIndex === 0}
-          className='p-2 rounded-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none'
-        >
-          <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M15 19l-7-7 7-7'></path></svg>
-        </button>
-        <div className='flex items-baseline space-x-2'>
-          <input
-            type='number'
-            value={currentPageIndex + 1}
-            onChange={handlePageInputChange}
-            className='w-12 text-center bg-gray-50 border border-gray-300 rounded-md py-1 focus:outline-none'
-            aria-label='Current Page'
-          />
-          <span className='text-gray-500'>/ {totalPages}</span>
-        </div>
-        <button
-          onClick={handleNextPage}
-          disabled={currentPageIndex === totalPages - 1}
-          className='p-2 rounded-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none'
-        >
-          <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M9 5l7 7-7 7'></path></svg>
-        </button>
-      </div>
+    <div>
+      <h3 className='text-base font-bold text-gray-800 mb-1.5'>{title}</h3>
+      <ul className='space-y-1 text-xs text-gray-600'>
+        {items.map((item, index) => (
+          <li key={index} className='flex items-start'>
+            <span className='mr-1.5 text-blue-600 font-semibold leading-tight'>
+              ■
+            </span>
+            <span className='leading-tight'>{item}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
-export default Catalog;
+const TextContent = forwardRef<HTMLDivElement>(function TextContent(props, ref) {
+  const curriculumItems = [
+    '자세 및 스윙 교정: 그립, 타점, 스텝, 체중 이동',
+    '기술 응용 훈련: 드라이브, 푸시, 언더, 하이클리어 등',
+    '게임 전술·판단력 향상: 포지션, 셔틀 선택, 상황 판단 훈련',
+  ];
+  const differentiationPoints = [
+    '통합된 커리큘럼 (코치 간 수업 차이 없음)',
+    '교정 중심 진행',
+    '실전 게임 연결 강화',
+    '영상 피드백 및 자세 분석 제공',
+  ];
+  const recommendedFor = [
+    '스윙, 자세 교정이 필요한 분',
+    '게임 응용이 약한 중급자',
+    '대회 준비 또는 실전 능력 향상 희망자',
+  ];
+
+  return (
+    <div ref={ref} className='p-4 desktop:p-0 space-y-3'>
+      <div>
+        <h3 className='text-base font-bold text-gray-800 mb-1.5'>운영 시간</h3>
+        <p className='text-xs text-gray-600 flex items-center'>
+          <span className='mr-1.5 text-blue-600 font-semibold'>■</span>
+          <span>주 1~2회, 회당 60~90분 (코치 1명 : 수강생 2~3명)</span>
+        </p>
+      </div>
+      <CatalogInfoItem title='커리큘럼 구성' items={curriculumItems} />
+      <CatalogInfoItem title='차별화 포인트' items={differentiationPoints} />
+      <CatalogInfoItem title='추천 대상' items={recommendedFor} />
+      <div>
+        <h3 className='text-base font-bold text-gray-800 mb-1.5'>문의</h3>
+        <p className='text-xs text-gray-600 flex items-center'>
+          <span className='mr-1.5 text-blue-600 font-semibold'>■</span>
+          <span>010-3105-6212</span>
+        </p>
+        <p className='text-xs text-gray-600 flex items-center'>
+          <span className='mr-1.5 text-blue-600 font-semibold'>■</span>
+          <span>인스타그램 @an_troke</span>
+        </p>
+      </div>
+    </div>
+  );
+});
+
+export default function Catalog() {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [cardHeight, setCardHeight] = useState<number | 'auto'>('auto');
+  const textContentRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (textContentRef.current) {
+      setCardHeight(textContentRef.current.scrollHeight + 16);
+    }
+  }, []);
+
+  return (
+    <section className='bg-gray-50 py-16 md:py-24'>
+      <div className='container mx-auto px-4'>
+        <div className='text-center mb-8'>
+          <h2 className='text-4xl font-extrabold text-gray-900 tracking-tight'>
+            레슨 안내
+          </h2>
+        </div>
+
+        <div className='hidden desktop:flex flex-row gap-10 items-center'>
+          <div className='w-2/5'>
+            <div className='relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-lg'>
+              <Image
+                src='/catalog/0.jpg'
+                alt='리부트 배드민턴 레슨'
+                layout='fill'
+                objectFit='cover'
+              />
+            </div>
+          </div>
+          <div className='w-3/5'>
+            <TextContent />
+          </div>
+        </div>
+
+        <div className='desktop:hidden'>
+          <div
+            className='scene w-full mx-auto'
+            style={{ maxWidth: '400px', height: cardHeight }}
+          >
+            <div
+              className={`card ${isFlipped ? 'is-flipped' : ''}`}
+              onClick={() => setIsFlipped(!isFlipped)}
+            >
+              <div className='card__face card__face--front'>
+                <div className='relative w-full h-full'>
+                  <Image
+                    src='/catalog/0.jpg'
+                    alt='리부트 배드민턴 레슨'
+                    layout='fill'
+                    objectFit='cover'
+                  />
+                  <div className='absolute inset-0 bg-black bg-opacity-30 flex flex-col items-center justify-center p-4 text-center'>
+                    <p className='text-white text-xl font-bold'>리부트 레슨 안내</p>
+                    <p className='text-white text-sm mt-2'>
+                      자세히 보려면 터치하세요
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className='card__face card__face--back'>
+                <TextContent ref={textContentRef} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
