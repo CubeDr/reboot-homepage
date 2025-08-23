@@ -38,7 +38,7 @@ export default function ImageFadeIn({ src, onFadeEnd }: Props) {
         src={front.src}
         alt={front.alt}
         onTransitionEnd={onTransitionEnd}
-        className={'transition-opacity' + (isFading ? ' duration-500 opacity-100' : ' opacity-0')}
+        className={isFading ? 'transition-opacity duration-500 opacity-100' : ' opacity-0'}
       />
     </>
   );
