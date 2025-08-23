@@ -1,7 +1,8 @@
 'use client';
 
-import Image, { ImageProps } from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { ImageProps } from 'next/image';
+import { useCallback, useEffect, useState } from 'react';
+import FittedImage from './FittedImage';
 
 interface Props {
   src: ImageProps;
@@ -13,7 +14,6 @@ export default function ImageFadeIn({ src, onFadeEnd }: Props) {
   const [front, setFront] = useState(src);
 
   const [isFading, setIsFading] = useState(false);
-  const nextImageRef = useRef<HTMLImageElement>(null);
 
   const onTransitionEnd = useCallback(() => {
     setBack(front);
@@ -28,20 +28,17 @@ export default function ImageFadeIn({ src, onFadeEnd }: Props) {
 
   return (
     <>
-      <Image
+      <FittedImage
         src={back.src}
         alt={back.alt}
-        fill={true}
-        className='object-cover object-center opacity-100'
+        className='opacity-100'
         priority
       />
-      <Image
-        ref={nextImageRef}
+      <FittedImage
         src={front.src}
         alt={front.alt}
-        fill={true}
         onTransitionEnd={onTransitionEnd}
-        className={'object-cover object-center transition-opacity' + (isFading ? ' duration-500 opacity-100' : ' opacity-0')}
+        className={'transition-opacity' + (isFading ? ' duration-500 opacity-100' : ' opacity-0')}
       />
     </>
   );
