@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import VideoItem from './VideoItem';
+import VideoItemSkeleton from './VideoItemSkeleton';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: '리부트 배드민턴 | 레슨 영상',
@@ -92,6 +94,37 @@ async function getYouTubePlaylistItems() {
   }
 }
 
+async function VideoList() {
+  const videos = await getYouTubePlaylistItems();
+
+  return (
+    <div className='flex flex-col gap-6'>
+      {videos && videos.length > 0 ? (
+        videos.map((item) => <VideoItem key={item.id} item={item} />)
+      ) : (
+        <p className='text-center text-gray-500'>
+          영상을 불러오는 데 실패했거나 재생목록이 비어있습니다.
+        </p>
+      )}
+    </div>
+  );
+}
+
+function LoadingSkeleton() {
+  return (
+    <div className='flex animate-pulse flex-col gap-6'>
+      <VideoItemSkeleton />
+      <VideoItemSkeleton />
+      <VideoItemSkeleton />
+      <VideoItemSkeleton />
+      <VideoItemSkeleton />
+      <VideoItemSkeleton />
+      <VideoItemSkeleton />
+      <VideoItemSkeleton />
+    </div>
+  );
+}
+
 async function LessonVideoPage() {
   const videos = await getYouTubePlaylistItems();
 
@@ -109,15 +142,9 @@ async function LessonVideoPage() {
         </div>
 
         <div className='mx-auto max-w-4xl'>
-          <div className='flex flex-col gap-6'>
-            {videos && videos.length > 0 ? (
-              videos.map((item) => <VideoItem key={item.id} item={item} />)
-            ) : (
-              <p className='text-center text-gray-500'>
-                영상을 불러오는 데 실패했거나 재생목록이 비어있습니다.
-              </p>
-            )}
-          </div>
+          <Suspense fallback={<LoadingSkeleton />}>
+            <VideoList />
+          </Suspense>
         </div>
       </div>
     </main>
