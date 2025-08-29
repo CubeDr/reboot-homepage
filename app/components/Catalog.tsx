@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState, useRef, useLayoutEffect, forwardRef } from 'react';
+import Link from 'next/link';
 
 function CatalogInfoItem({
   title,
@@ -126,7 +127,9 @@ export default function Catalog() {
                     objectFit='cover'
                   />
                   <div className='absolute inset-0 bg-black bg-opacity-30 flex flex-col items-center justify-center p-4 text-center'>
-                    <p className='text-white text-xl font-bold'>리부트 레슨 안내</p>
+                    <p className='text-white text-xl font-bold'>
+                      리부트 레슨 안내
+                    </p>
                     <p className='text-white text-sm mt-2'>
                       자세히 보려면 터치하세요
                     </p>
@@ -138,6 +141,12 @@ export default function Catalog() {
               </div>
             </div>
           </div>
+        </div>
+
+        <div className='mt-12 text-center'>
+          <Link href='/lesson'>
+            <button className="px-5 py-4 text-sm font-semibold transition-colors duration-300 shadow bg-blue-400 text-white">레슨 영상 보러가기 →</button>
+          </Link>
         </div>
       </div>
     </section>
