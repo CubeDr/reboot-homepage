@@ -105,7 +105,7 @@ function LoadingSkeleton() {
 
 function LessonVideoPage() {
   return (
-    <main className='min-h-screen bg-gray-50'>
+    <main className='min-h-screen'>
       <div className='mx-auto px-4 py-12 md:px-6 lg:py-16'>
         <div className='mb-8 text-center md:mb-12'>
           <h1 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
