@@ -24,9 +24,9 @@ function VideoItem({ item }: VideoItemProps) {
       href={`https://www.youtube.com/watch?v=${item.snippet.resourceId.videoId}`}
       target='_blank'
       rel='noopener noreferrer'
-      className='group flex overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md'
+      className='group flex overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md mobile:flex-col'
     >
-      <div className='relative h-36 w-64 flex-shrink-0 md:h-40 md:w-72'>
+      <div className='relative h-36 w-64 flex-shrink-0 mobile:h-80 mobile:w-full'>
         <Image
           src={item.snippet.thumbnails.maxres?.url || item.snippet.thumbnails.high?.url || '/placeholder.jpg'}
           alt={`${item.snippet.title} 썸네일`}
