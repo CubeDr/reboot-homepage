@@ -66,6 +66,16 @@ async function getYouTubePlaylistItems() {
         duration: await getVideoDuration(item.snippet.resourceId.videoId),
       }))
     );
+
+    videosWithDuration.forEach((item) => {
+      const description = item.snippet.description;
+      const separator = '-----';
+      const separatorIndex = description.indexOf(separator);
+      if (separatorIndex === -1) return;
+
+      item.snippet.description = description.substring(0, separatorIndex).trim();
+    });
+
     return videosWithDuration;
   } catch (error) {
     return [];
