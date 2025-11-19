@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 export const dynamic = 'force-dynamic';
 import 'server-only';
+=======
+import 'server-only';
+
+>>>>>>> 2cbd4a8 (1. firebase-admin 추가)
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { adminAuth } from '@/firebaseAdmin';
