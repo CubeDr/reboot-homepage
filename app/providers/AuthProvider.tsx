@@ -8,7 +8,8 @@ import React, {
   useEffect,
 } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { app, getUserData, UserData } from '@/firebase';
+import { app, getUserData } from '@/firebase';
+import { UserData } from '@/types/firebase';
 
 interface AuthContextType {
   uid: string | null;

@@ -1,10 +1,10 @@
 'use client';
 
-import { Role } from '@/firebase';
 import { usePathname, useRouter } from 'next/navigation';
-import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import { useAuth } from '../app/providers/AuthProvider';
 import { useDialog } from '../app/providers/DialogProvider';
+import { Role } from '@/types/firebase';
 
 interface Props {
   requiresSignOut?: boolean;
