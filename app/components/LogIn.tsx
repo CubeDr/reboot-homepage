@@ -2,8 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 import { getAuth, signOut } from 'firebase/auth';
-import { app, Role } from '@/firebase';
+import { app } from '@/firebase';
 import { useAuth } from '../providers/AuthProvider';
+import { Role } from '@/types/firebase';
 
 function Button({ text, onClick }: { text: string; onClick: () => void }) {
   return (
