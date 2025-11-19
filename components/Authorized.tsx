@@ -22,7 +22,7 @@ export default function Authorized({
   onUnauthorized,
   children,
 }: PropsWithChildren<Props>) {
-  const { userData, isAuthReady } = useAuth();
+  const { userData } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const { showDialog } = useDialog();
@@ -31,7 +31,7 @@ export default function Authorized({
   const [isEntry, setIsEntry] = useState(true);
 
   useEffect(() => {
-    if (!isAuthReady || isAuthorized == null) {
+    if (isAuthorized == null) {
       return;
     }
 
@@ -52,12 +52,9 @@ export default function Authorized({
       return;
     }
     onUnauthorized();
-  }, [router, onUnauthorized, pathname, isAuthReady, isAuthorized, isEntry, onlyCheckEntry]);
+  }, [router, onUnauthorized, pathname, isAuthorized, isEntry, onlyCheckEntry]);
 
   useEffect(() => {
-    if (!isAuthReady) {
-      return;
-    }
 
     if (userData != null && requiresSignOut) {
       setIsAuthorized(false);
@@ -77,7 +74,7 @@ export default function Authorized({
       }
     }
     setIsAuthorized(true);
-  }, [isAuthReady, userData, setIsAuthorized, allowedRoles, requiresSignOut]);
+  }, [userData, setIsAuthorized, allowedRoles, requiresSignOut]);
 
   return <>{isAuthorized && children}</>;
 }

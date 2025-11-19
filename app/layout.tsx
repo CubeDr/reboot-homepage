@@ -8,6 +8,7 @@ import { src } from '../utils/image_utils';
 import { AuthProvider } from './providers/AuthProvider';
 import { DialogProvider } from './providers/DialogProvider';
 import Analytics from './components/Analytics';
+import { getServerAuth } from '@/utils/server_utils';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -35,10 +36,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { uid, userData } = await getServerAuth();
   return (
     <html lang="ko">
       <Analytics />
-      <AuthProvider>
+      <AuthProvider initialUid={uid} initialUserData={userData}>
         <body className={inter.className}>
           <DialogProvider>
             <div className="flex flex-col min-h-screen">

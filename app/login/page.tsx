@@ -49,8 +49,7 @@ export default function Login() {
           showDialog({
             title: '성공적으로 로그인했습니다',
             onConfirm: () => {
-              // 이전 페이지로 돌아가면서, 서버 상태도 새로고침
-              router.back();
+              router.push('/');
               router.refresh();
               return true;
             },
@@ -69,9 +68,7 @@ export default function Login() {
 
               // 2) 클라이언트 Firebase 로그아웃
               await signOut(getAuth(app));
-
-              // 3) 이전 페이지로 돌아가면서 서버 상태도 새로고침
-              router.back();
+              router.push('/');
               router.refresh();
               return true;
             },

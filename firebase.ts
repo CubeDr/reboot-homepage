@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { clientConfig } from './config';
+export { Role, toRoleFromString, toRoleString, type UserData } from './types/firebase';
 import { Role, toRoleFromString } from './types/firebase';
 
 
