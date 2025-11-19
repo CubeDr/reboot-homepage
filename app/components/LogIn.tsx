@@ -21,9 +21,19 @@ export default function LogIn() {
   const router = useRouter();
 
   async function handleLogout() {
-    await signOut(getAuth(app));
-    router.push('/');
-    router.refresh();
+    try {
+      // 1) 서버 세션 쿠키 삭제 (session 쿠키 지우는 API)
+      await fetch('/api/sessionLogout', {
+        method: 'POST',
+      });
+
+      // 2) Firebase 클라이언트 로그아웃
+      await signOut(getAuth(app));
+    } finally {
+      // 3) 메인으로 이동 + 서버 리렌더
+      router.push('/');
+      router.refresh();
+    }
   }
 
   return (
