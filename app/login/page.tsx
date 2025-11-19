@@ -49,7 +49,8 @@ export default function Login() {
           showDialog({
             title: '성공적으로 로그인했습니다',
             onConfirm: () => {
-              router.push('/');
+              // 이전 페이지로 돌아가면서, 서버 상태도 새로고침
+              router.back();
               router.refresh();
               return true;
             },
@@ -68,7 +69,9 @@ export default function Login() {
 
               // 2) 클라이언트 Firebase 로그아웃
               await signOut(getAuth(app));
-              router.push('/');
+
+              // 3) 이전 페이지로 돌아가면서 서버 상태도 새로고침
+              router.back();
               router.refresh();
               return true;
             },
@@ -98,6 +101,8 @@ export default function Login() {
         emailVerificationText="이메일로 로그인"
         googleVerificationText="구글 계정으로 로그인"
         onUserSignedIn={onUserSignedIn}
+      />
+      onUserSignedIn={onUserSignedIn}
       />
       <p className="text-sm font-light text-gray-500">
         계정이 없으신가요?
