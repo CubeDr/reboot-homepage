@@ -29,7 +29,7 @@ export default function CourseCard({ course }: CourseCardProps) {
       : 0;
 
   return (
-    <Link href={`/onlineclass/${course.id}`}>
+    <Link href={`/onlineclass/courses/${course.id}`}>
       <div className="relative rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 ease-in-out w-full aspect-[16/9]">
         <FittedImage
           src={course.thumbnail}
