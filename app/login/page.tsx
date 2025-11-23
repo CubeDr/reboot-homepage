@@ -102,8 +102,6 @@ export default function Login() {
         googleVerificationText="구글 계정으로 로그인"
         onUserSignedIn={onUserSignedIn}
       />
-      onUserSignedIn={onUserSignedIn}
-      />
       <p className="text-sm font-light text-gray-500">
         계정이 없으신가요?
         <Link
