@@ -1,53 +1,5 @@
 import CourseCard from "../CourseCard";
-
-// Mock data for the online courses, structured by skill-based sections
-const courseSections = [
-  {
-    title: "스트로크",
-    courses: [
-      {
-        id: "1",
-        title: "배드민턴 기본기",
-        description: "기본 스트로크, 풋워크, 그리고 경기 규칙을 마스터하세요.",
-        thumbnail: "/catalog/0.jpg",
-        totalVideos: 10,
-        completedVideos: 3,
-        difficulty: "초급",
-      },
-      {
-        id: "2",
-        title: "고급 스매시 기술",
-        description: "강력하고 정확한 스매시를 구사하는 법을 배우세요.",
-        thumbnail: "/catalog/0.jpg",
-        totalVideos: 8,
-        completedVideos: 0,
-        difficulty: "중급",
-      },
-    ],
-  },
-  {
-    title: "풋워크 & 수비",
-    courses: [
-      {
-        id: "3",
-        title: "수비 풋워크 훈련",
-        description: "이 훈련을 통해 코트 커버리지와 민첩성을 향상시키세요.",
-        thumbnail: "/catalog/0.jpg",
-        totalVideos: 12,
-        completedVideos: 12,
-        difficulty: "중급",
-      },
-    ],
-  },
-  {
-    title: "서브 & 리시브",
-    courses: [],
-  },
-  {
-    title: "로테이션 & 전술",
-    courses: [],
-  }
-];
+import { courseSections } from "../data";
 
 export default function OnlineClassCoursesPage() {
   return (
