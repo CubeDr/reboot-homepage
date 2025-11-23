@@ -23,7 +23,7 @@ export default function OnlineClassIntroPage() {
           </p>
           <div className="mt-8">
             <Link
-              href="/onlineclass/courses"
+              href="/onlineclass/payment"
               className="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition duration-300"
             >
               강의 보러가기
