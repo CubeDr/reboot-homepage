@@ -1,6 +1,7 @@
 'use client';
 
-import { firestore, Role, toRoleFromString, UserData } from '@/firebase';
+import { firestore } from '@/firebase';
+import { Role, toRoleFromString, UserData } from '@/types/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import React, { useCallback, useEffect, useState } from 'react';
 import UserItem from './UserItem';

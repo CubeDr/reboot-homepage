@@ -2,46 +2,9 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { clientConfig } from './config';
+export { Role, toRoleFromString, toRoleString, type UserData } from './types/firebase';
+import { Role, toRoleFromString } from './types/firebase';
 
-export enum Role {
-  ADMIN,
-  MANAGER,
-  MEMBER,
-  NONE,
-  BANNED,
-}
-
-export function toRoleString(role: Role): string {
-  return Role[role].toLowerCase();
-}
-
-export function toRoleFromString(role: string): Role {
-  switch (role) {
-    case 'manager':
-      return Role.MANAGER;
-    case 'admin':
-      return Role.ADMIN;
-    case 'member':
-      return Role.MEMBER;
-    default:
-      return Role.NONE;
-    case 'banned':
-      return Role.BANNED;
-  }
-}
-
-export interface UserData {
-  uid: string;
-
-  name: string;
-  role: Role;
-
-  gender: string;
-  birthday: string;
-
-  email: string;
-  phone: string;
-}
 
 export async function getUserData() {
   const user = getAuth().currentUser;
