@@ -10,7 +10,7 @@ export type ServerUser = {
 };
 
 export async function getServerUser(): Promise<ServerUser | null> {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const session = cookieStore.get('session')?.value;
 
   if (!session) {
@@ -37,7 +37,7 @@ export type ServerAuth = {
 };
 
 export async function getServerAuth(): Promise<ServerAuth> {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const session = cookieStore.get('session')?.value;
 
   if (!session) {

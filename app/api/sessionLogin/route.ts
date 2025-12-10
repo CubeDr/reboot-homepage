@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     });
 
     // 5) HttpOnly 쿠키로 저장
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     cookieStore.set('session', sessionCookie, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
