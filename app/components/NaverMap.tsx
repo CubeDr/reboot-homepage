@@ -12,8 +12,8 @@ export interface Coords {
 }
 
 function NaverMap({ lat, lng }: Coords) {
-  const mapRef = useRef<naver.maps.Map>();
-  const markerRef = useRef<naver.maps.Marker>();
+  const mapRef = useRef<naver.maps.Map | null>(null);
+  const markerRef = useRef<naver.maps.Marker | null>(null);
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
   useEffect(() => {
