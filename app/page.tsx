@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import Introduction from './components/Introduction';
 import MainCoaches from './components/MainCoaches';
 import Location from './components/Location';
-import Catalog from './components/Catalog';
+import Lessons from './components/Lessons';
 
 export const metadata: Metadata = {
   other: {
@@ -42,8 +42,7 @@ export default function Home() {
       <ImageSlide srcs={slideImages}>
         <Introduction />
       </ImageSlide>
-      <hr />
-      <Catalog />
+      <Lessons />
       <MainCoaches />
       <Location />
     </div>
